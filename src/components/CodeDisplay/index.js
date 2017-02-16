@@ -3,10 +3,15 @@ import './style.css';
 
 import CodeLine from '../CodeLine';
 
-const CodeDisplay = ({ code }) => (
+const CodeDisplay = ({ tokenLines, index }) => (
   <div className="code-display__background">
-    {code.split('\n').map((line, index) =>
-      <CodeLine key={index} lineNumber={index + 1} line={line} />
+    {tokenLines.map((line, key) =>
+      <CodeLine
+        key={key}
+        lineNumber={key + 1}
+        line={line}
+        curIndex={index}
+      />
     )}
   </div>
 );

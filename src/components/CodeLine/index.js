@@ -1,27 +1,5 @@
 import React from 'react';
-import { tokenizer } from 'acorn';
-import trimRight from 'trim-right';
 import './style.css';
-
-const highlightLine = (line) => {
-  let tokens = tokenizer(trimRight(line))
-    , output = []
-    , index = 0
-    , key = 0;
-
-  while (index < line.length) {
-    const { start, end, value, type } = tokens.getToken();
-
-    if (start > index) {
-      output.push({ type: undefined, value: line.slice(index, start) });
-    }
-
-    output.push({ type: type, value: value });
-    index = end;
-  }
-
-  return output;
-}
 
 const getTokenClass = (type) => {
   switch (type.label) {
@@ -53,14 +31,16 @@ const getContent = (value, type) => {
   }
 }
 
-const CodeLine = ({ lineNumber, line }) => (
+const CodeLine = ({ lineNumber, line, curIndex }) => (
   <div className="code-line__wrapper">
     <div className="code-line__line-number">{lineNumber}</div>
     <span className="code-line__line-text">
-      {highlightLine(line).map(({ type, value }, key) =>
-        type === undefined
-        ? <span key={key}>{value}</span>
-        : <span key={key} className={getTokenClass(type)}>{getContent(value, type)}</span>
+      {line.map((content, key) =>
+        typeof content === 'string'
+        ? <span key={key}>{content}</span>
+        : <span key={key} className={getTokenClass(content.type)}>
+            {getContent(content.value, content.type)}
+          </span>
       )}
     </span>
   </div>

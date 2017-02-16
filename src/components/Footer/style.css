@@ -9,4 +9,9 @@
   color: #aaa;
   font-family: 'Source Code Pro', monospace;
   font-weight: bold;
+  transition: 0.25s ease;
+}
+
+.footer__link:hover {
+  color: black;
 }
