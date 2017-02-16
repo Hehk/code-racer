@@ -1,0 +1,8 @@
+.code-display__background {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+
+  width: 750px;
+  padding: 10px 0;
+}

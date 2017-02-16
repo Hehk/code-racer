@@ -1,0 +1,21 @@
+{
+  "name": "code-racer",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.9.0"
+  },
+  "dependencies": {
+    "acorn": "^4.0.11",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "spidermonkey": "^0.1.3",
+    "trim-right": "^1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

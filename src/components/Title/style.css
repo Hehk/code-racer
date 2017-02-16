@@ -1,0 +1,9 @@
+.title {
+  position: absolute;
+  top: 10%;
+  font-size: 5em;
+  color: #aaa;
+  font-family: 'Source Code Pro', monospace;
+  font-style: italic;
+  font-weight: bold;
+}

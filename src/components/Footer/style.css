@@ -1,0 +1,12 @@
+.footer {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: #aaa;
+  font-family: 'Source Code Pro', monospace;
+  font-weight: bold;
+}

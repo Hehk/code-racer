@@ -1,0 +1,27 @@
+.code-line__wrapper {
+  font-family: 'Source Code Pro', monospace;
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+}
+
+.code-line__line-number {
+  width: 50px;
+  text-align: center;
+  color: #888;
+  user-select: none;
+}
+
+.code-line__line-text {
+
+}
+
+.code-token__1 { color: black; }
+.code-token__2 { color: hsl(198, 99%, 37%); }
+.code-token__3 { color: hsl(221, 87%, 60%); }
+.code-token__4 { color: hsl(301, 63%, 40%); }
+.code-token__5 { color: hsl(119, 34%, 47%); }
+.code-token__6 { color: hsl(  5, 74%, 59%); }
+.code-token__7 { color: hsl(344, 84%, 43%); }
+.code-token__8 { color: hsl(41, 99%, 30%); }
+.code-token__9 { color: hsl(41, 99%, 38%); }
