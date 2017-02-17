@@ -25,16 +25,25 @@ class App extends React.Component {
     };
   }
 
+  // used to track for jsx requiring ""
+  betweenAngleQuotes = false
   getValue = (value, type) => {
+    console.log(this.betweenAngleQuotes)
     switch (type.label) {
       case 'jsxTagStart':
+        this.betweenAngleQuotes = true;
         return '<';
 
       case 'jsxTagEnd':
+        this.betweenAngleQuotes = false;
         return '>';
 
       case 'string':
-        return `\'${value}\'`;
+        if (this.betweenAngleQuotes) {
+          return `\"${value}\"`;
+        } else {
+          return `\'${value}\'`;
+        }
 
       default:
     }

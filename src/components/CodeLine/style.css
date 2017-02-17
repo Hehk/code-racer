@@ -18,7 +18,7 @@
 }
 
 .code-line__line-text {
-
+  white-space: pre;
 }
 
 .code-token__1 { color: black; }
