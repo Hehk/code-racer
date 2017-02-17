@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "acorn": "^4.0.11",
+    "acorn-jsx": "^3.0.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "spidermonkey": "^0.1.3",

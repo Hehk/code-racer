@@ -10,7 +10,7 @@ const CodeDisplay = ({ tokenLines, index }) => (
         key={key}
         lineNumber={key + 1}
         line={line}
-        curIndex={index}
+        index={index}
       />
     )}
   </div>

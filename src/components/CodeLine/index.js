@@ -2,6 +2,10 @@ import React from 'react';
 import './style.css';
 
 const getTokenClass = (type) => {
+  if (type === undefined) {
+    return 'code-token__1';
+  }
+
   switch (type.label) {
     case 'var':
     case 'let':
@@ -23,24 +27,25 @@ const getTokenClass = (type) => {
   }
 }
 
-const getContent = (value, type) => {
-  if (value === undefined) {
-    return type.label;
-  } else {
-    return value;
-  }
-}
-
-const CodeLine = ({ lineNumber, line, curIndex }) => (
+const CodeLine = ({ lineNumber, line, index }) => (
   <div className="code-line__wrapper">
-    <div className="code-line__line-number">{lineNumber}</div>
+    <div className={`code-line__line-number${
+        ( index.line + 1 === lineNumber) ? ' code-line__line-number__selected' : ''
+      }`}>
+      {lineNumber}
+    </div>
     <span className="code-line__line-text">
-      {line.map((content, key) =>
-        typeof content === 'string'
-        ? <span key={key}>{content}</span>
-        : <span key={key} className={getTokenClass(content.type)}>
-            {getContent(content.value, content.type)}
-          </span>
+      {line.map(({ type, value }, key) =>
+        <span
+          key={key}
+          className={
+            (index.token === key && index.line + 1 === lineNumber)
+            ? 'code-token__highlight'
+            : getTokenClass(type)
+          }
+        >
+          {value}
+        </span>
       )}
     </span>
   </div>

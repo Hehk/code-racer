@@ -1,5 +1,5 @@
 import React from 'react';
-import { tokenizer } from 'acorn';
+import { tokenizer } from 'acorn-jsx';
 import trimRight from 'trim-right';
 import './App.css';
 
@@ -16,17 +16,39 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      tokenLines: this.createTokenLines(text[0]),
+      tokenLines: this.createTokenLines(text[1]),
       index: {
         line: 0,
         token: 0,
       },
+      active: true,
     };
+  }
+
+  getValue = (value, type) => {
+    switch (type.label) {
+      case 'jsxTagStart':
+        return '<';
+
+      case 'jsxTagEnd':
+        return '>';
+
+      case 'string':
+        return `\'${value}\'`;
+
+      default:
+    }
+
+    if (value === undefined) {
+      return type.label;
+    } else {
+      return value;
+    }
   }
 
   createTokenLines = (text) => {
     return text.split('\n').map((line) => {
-      let tokens = tokenizer(trimRight(line))
+      let tokens = tokenizer(trimRight(line), {plugins: {jsx: true}})
         , list = []
         , index = 0;
 
@@ -34,10 +56,10 @@ class App extends React.Component {
         const { start, end, value, type } = tokens.getToken();
 
         if (start > index) {
-          list.push(line.slice(index, start));
+          list.push({ value: line.slice(index, start) });
         }
 
-        list.push({ type: type, value: value });
+        list.push({ type: type, value: this.getValue(value, type) });
         index = end;
       }
 
@@ -45,13 +67,45 @@ class App extends React.Component {
     });
   }
 
+  moveIndex = () => {
+    const { tokenLines, index } = this.state;
+    let { line, token } = index;
+
+    if (tokenLines[line][token + 1] === undefined) {
+      line++;
+      token = 0;
+      if (tokenLines[line] === undefined) {
+        return this.setState({
+          index: { token: 0, line: 0 },
+          active: false,
+        });
+      }
+      while (tokenLines[line].length === 0) { line++; }
+    } else {
+      token++;
+    }
+
+    this.setState({
+      index: { token, line }
+    });
+  }
+
   render() {
-    console.log(this.state);
+    const { tokenLines, index, active } = this.state
+        , curToken = tokenLines[index.line][index.token].value;
+
     return (
       <Background>
         <Title />
-        <CodeDisplay {...this.state} />
-        <Input currentToken={'const'} handleTokenChange={() => console.log('test')} />
+        { active
+          ? [ <CodeDisplay key={0} tokenLines={tokenLines} index={index} />
+            , <Input
+                key={1}
+                curToken={curToken.toString()}
+                handleTokenChange={this.moveIndex}
+              /> ]
+          : <div>test</div>
+        }
         <Footer />
       </Background>
     );

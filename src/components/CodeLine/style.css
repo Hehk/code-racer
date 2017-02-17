@@ -12,6 +12,11 @@
   user-select: none;
 }
 
+.code-line__line-number__selected {
+  color: hsl(  5, 74%, 59%);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
 .code-line__line-text {
 
 }
@@ -25,3 +30,20 @@
 .code-token__7 { color: hsl(344, 84%, 43%); }
 .code-token__8 { color: hsl(41, 99%, 30%); }
 .code-token__9 { color: hsl(41, 99%, 38%); }
+.code-token__highlight {
+  color: hsl(221, 87%, 60%);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  font-weight: bold;
+  position: relative;
+}
+.code-token__highlight:before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  height: 2px;
+  right: 0;
+  left: 0;
+  background-color: hsl(221, 87%, 60%);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  border-radius: 2px;
+}

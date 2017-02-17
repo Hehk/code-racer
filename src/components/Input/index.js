@@ -2,24 +2,32 @@ import React from 'react';
 import './style.css';
 
 class Input extends React.Component {
-  state = { value: '', curToken: 'const' }
-
+  state = { value: '' }
+  
   handleChange = (e) => {
     const newValue = e.target.value
-        , { curToken } = this.state;
+        , curToken = this.props.curToken;
 
-    if (curToken.startsWith(newValue)) {
-      this.setState({ value: newValue })
+    if (curToken === newValue) {
+      this.props.handleTokenChange();
+      this.setState({ value: '' });
+    } else {
+      this.setState({ value: newValue });
     }
   }
 
   render() {
+    const { curToken } = this.props
+        , { value } = this.state;
+
     return (
       <input
         type="text"
-        className="input"
-        value={this.state.value}
+        value={value}
+        autoFocus={true}
         onChange={this.handleChange}
+        onKeyDown={this.handleKeyDown}
+        className={`input${curToken.startsWith(value) ? '' : ' input__failed'}`}
       />
     );
   }
