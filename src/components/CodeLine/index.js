@@ -15,12 +15,23 @@ const getTokenClass = (type) => {
     case 'num':
       return 'code-token__4';
 
+    case 'string':
+      return 'code-token__5';
+
     case ':':
     case '.':
       return 'code-token__6';
 
     case 'this':
       return 'code-token__7';
+
+    case 'for':
+    case 'import':
+    case 'from':
+    case 'if':
+    case 'while':
+    case 'else':
+      return 'code-token__8';
 
     default:
       return 'code-token__1';

@@ -25,25 +25,19 @@ class App extends React.Component {
     };
   }
 
-  // used to track for jsx requiring ""
-  betweenAngleQuotes = false
-  getValue = (value, type) => {
-    console.log(this.betweenAngleQuotes)
+  getValue = (value, type, list, index) => {
     switch (type.label) {
       case 'jsxTagStart':
-        this.betweenAngleQuotes = true;
         return '<';
 
       case 'jsxTagEnd':
-        this.betweenAngleQuotes = false;
         return '>';
 
       case 'string':
-        if (this.betweenAngleQuotes) {
-          return `\"${value}\"`;
-        } else {
-          return `\'${value}\'`;
+        if (list[index - 2] && list[index - 2].type && list[index - 2].type.label === 'jsxName') {
+          return `"${value}"`;
         }
+        return `'${value}'`;
 
       default:
     }
@@ -68,7 +62,7 @@ class App extends React.Component {
           list.push({ value: line.slice(index, start) });
         }
 
-        list.push({ type: type, value: this.getValue(value, type) });
+        list.push({ type: type, value: this.getValue(value, type, list, list.length) });
         index = end;
       }
 
