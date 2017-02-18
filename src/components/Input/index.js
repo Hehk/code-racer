@@ -3,21 +3,26 @@ import './style.css';
 
 class Input extends React.Component {
   state = { value: '' }
-  
+
   handleChange = (e) => {
     const newValue = e.target.value
-        , curToken = this.props.curToken;
+        , { curToken, errorDetected, handleTokenChange, changeValidity } = this.props;
 
     if (curToken === newValue) {
-      this.props.handleTokenChange();
+      handleTokenChange();
       this.setState({ value: '' });
     } else {
+      if (this.state.value.length < newValue.length && !curToken.startsWith(newValue)) {
+        errorDetected();
+      }
+
+      changeValidity(curToken.startsWith(newValue))
       this.setState({ value: newValue });
     }
   }
 
   render() {
-    const { curToken } = this.props
+    const { curToken, valid } = this.props
         , { value } = this.state;
 
     return (
@@ -27,7 +32,7 @@ class Input extends React.Component {
         autoFocus={true}
         onChange={this.handleChange}
         onKeyDown={this.handleKeyDown}
-        className={`input${curToken.startsWith(value) ? '' : ' input__failed'}`}
+        className={`input${valid ? '' : ' input__failed'}`}
       />
     );
   }

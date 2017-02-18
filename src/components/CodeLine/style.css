@@ -13,8 +13,16 @@
 }
 
 .code-line__line-number__selected {
-  color: hsl(  5, 74%, 59%);
+  color: hsl(198, 99%, 37%);
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  font-weight: bold;
+}
+.code-line__line-number__selected:before,
+.code-line__line-number__selected:after {
+  content: '-';
+}
+.code-line__line-number__invalid {
+  color: hsl(  5, 74%, 59%);
 }
 
 .code-line__line-text {
@@ -46,4 +54,10 @@
   background-color: hsl(221, 87%, 60%);
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border-radius: 2px;
+}
+.code-token__invalid {
+  color: hsl(  5, 74%, 59%);
+}
+.code-token__invalid:before {
+  background-color: hsl(  5, 74%, 59%);
 }
