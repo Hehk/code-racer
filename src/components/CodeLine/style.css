@@ -17,9 +17,11 @@
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   font-weight: bold;
 }
-.code-line__line-number__selected:before,
+.code-line__line-number__selected:before {
+  content: '[';
+}
 .code-line__line-number__selected:after {
-  content: '-';
+  content: ']';
 }
 .code-line__line-number__invalid {
   color: hsl(  5, 74%, 59%);
