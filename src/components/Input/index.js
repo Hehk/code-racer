@@ -22,7 +22,7 @@ class Input extends React.Component {
   }
 
   render() {
-    const { curToken, valid } = this.props
+    const { valid } = this.props
         , { value } = this.state;
 
     return (
